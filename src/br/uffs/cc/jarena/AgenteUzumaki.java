@@ -10,21 +10,37 @@ public class AgenteUzumaki extends Agente{
 		if(!podeMoverPara(getDirecao())) {
 			setDirecao(geraDirecaoAleatoria());
 		}
+		if(!tomouDano()){
+			setDirecao(geraDirecaoAleatoria());
+		}
 	}
 	
 	public void recebeuEnergia() {
+		System.out.println(getId() + " ESTOU NO COGUMELO x= " + getX() + " y = " + getY());
+		enviaMensagem("ganhandoVida");
 	}
 	
 	public void tomouDano(int energiaRestanteInimigo) {
+		System.out.println(getId() + " estou tomando dano aqui, x= " + getX() + " y = " + getY() + ", ini = " + energiaRestanteInimigo);
+		enviaMensagem("tomandoDano");
+
 	}
+
 	
 	public void ganhouCombate() {
 	}
 	
 	public void recebeuMensagem(String msg) {
-	}	
+		if(msg.equals("tomandoDano")){
+			setDirecao(getDirecao());
+
+		}
+		if(msg.equals("ganhandoVida")){
+			setDirecao(getDirecao());
+		}
+	}		
 	
 	public String getEquipe() {
-		return "Bianca";
+		return "EquipeKakashi";
 	}
 }
