@@ -1,4 +1,5 @@
-//Aluna: Bianca Gabriela Fritsch
+//Alunas: Bianca Gabriela Fritsch
+//        Eweline
 package br.uffs.cc.jarena;
 
 public class AgenteUzumaki extends Agente{
@@ -8,9 +9,6 @@ public class AgenteUzumaki extends Agente{
 	
 	public void pensa() {
 		if(!podeMoverPara(getDirecao())) {
-			setDirecao(geraDirecaoAleatoria());
-		}
-		if(!tomouDano()){
 			setDirecao(geraDirecaoAleatoria());
 		}
 	}
@@ -41,6 +39,6 @@ public class AgenteUzumaki extends Agente{
 	}		
 	
 	public String getEquipe() {
-		return "EquipeKakashi";
+		return "Equipe Bianca & Eweline";
 	}
 }
