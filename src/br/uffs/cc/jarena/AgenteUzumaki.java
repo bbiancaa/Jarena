@@ -3,18 +3,27 @@
 package br.uffs.cc.jarena;
 
 public class AgenteUzumaki extends Agente{
+	int count = 0;
+	Boolean chegouDestino = false;
+	Boolean parar = false;
+	int grupo = this.getId() % 5;
+
   public AgenteUzumaki(Integer x, Integer y, Integer energia) {
 		super(x, y, energia);
-		int count = 0;
-		Boolean chegouDestino = false;
-		Boolean parar = false;
-		int grupo = this.getId() % 5;
+		
 	}
 	
 	public void pensa() {
 		System.out.println("ID: " + this.getId() + "grupo: " + this.grupo);
 		System.out.println("PosX: " + this.getX() + "PosY: " + this.getY());
 		this.count++;
+		if(count % 5 == 0){
+			this.parar = false;
+		}
+		if(parar){
+			setDirecao(this.NENHUMA_DIRECAO);
+			return;
+		}
 	}
 	
 	public void recebeuEnergia() {
