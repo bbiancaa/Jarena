@@ -17,6 +17,7 @@ public class AgenteUzumaki extends Agente{
 		//System.out.println("ID: " + this.getId() + "grupo: " + this.grupo);
 		//System.out.println("PosX: " + this.getX() + "PosY: " + this.getY());
 		
+		/*
 		this.count++;
 		if(count % 5 == 0){
 			this.parar = false;
@@ -25,6 +26,8 @@ public class AgenteUzumaki extends Agente{
 			setDirecao(this.NENHUMA_DIRECAO);
 			return;
 		}
+		*/
+
 
 		// seção de comandos para os agentes andarem mais no meio da tela
 		if(this.getX() == 0 && this.getY() == 0){
