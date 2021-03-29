@@ -10,11 +10,12 @@ public class AgenteUzumaki extends Agente {
     }
 
     public void pensa() {
-        if (podeDividir() && getEnergia() >= 800) {
+        /*if (podeDividir() && getEnergia() >= 800) {
             divide();
         }
-
-        else if ((!podeMoverPara(getDirecao())) || (isParado())) {
+        */
+        //decidimos tirar a parte em que se dividem, pois não perdiam muita energia
+        if (!podeMoverPara(getDirecao()) || (isParado())){
             setDirecao(geraDirecaoAleatoria());
         }
 
@@ -22,27 +23,27 @@ public class AgenteUzumaki extends Agente {
         if (this.getX() == 0 && this.getY() == 0) {
             setDirecao(DIREITA);
         }
-        if (this.getX() == 80 && this.getY() == 0) {
+        else if (this.getX() == 80 && this.getY() == 0) {
             setDirecao(BAIXO);
         }
 
-        if (this.getX() == 80 && this.getY() == 480) {
+        else if (this.getX() == 80 && this.getY() == 480) {
             setDirecao(DIREITA);
         }
-        if (this.getId() < 22 && this.getX() == 600) {
+        else if (this.getId() < 22 && this.getX() == 600) {
             setDirecao(CIMA);
         }
-        if (this.getId() < 22 && this.getX() == 600 && getY() == 120) {
+        else if (this.getId() < 22 && this.getX() == 600 && getY() == 120) {
             setDirecao(ESQUERDA);
         }
 
-        if (this.getId() > 22 && this.getX() == 120) {
+        else if (this.getId() > 22 && this.getX() == 120) {
             setDirecao(CIMA);
         }
-        if (this.getId() > 22 && this.getX() == 120 && getY() == 260) {
+        else if (this.getId() > 22 && this.getX() == 120 && getY() == 260) {
             setDirecao(DIREITA);
         }
-        if (this.getId() > 22 && this.getX() == 470 && getY() == 260) {
+        else if (this.getId() > 22 && this.getX() == 470 && getY() == 260) {
             setDirecao(BAIXO);
         }
 
@@ -60,7 +61,8 @@ public class AgenteUzumaki extends Agente {
         if (getEnergia() > energiaRestanteInimigo) {
             para();
             System.out.println("Agente inimigo: " + getId() + "está tomando dano. Yeey");
-        } else {
+        } 
+        else {
             setDirecao(geraDirecaoAleatoria());
             System.out.println("Agente: " + getId() + "está tomando pipoco então vai fugir");
         }
