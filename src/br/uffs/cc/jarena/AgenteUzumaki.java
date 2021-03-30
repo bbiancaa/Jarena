@@ -36,7 +36,7 @@ public class AgenteUzumaki extends Agente {
         }
 
         
-        // Tabela de comandos para o nascimento em x = 0
+        // seção de comandos para o nascimento em x = 0
         if (this.getId() < 22 && this.getX() == 80 && this.getY() == 180) {
             setDirecao(DIREITA);
         }
@@ -142,7 +142,7 @@ public class AgenteUzumaki extends Agente {
 
     public void ganhouCombate() {
         //enviaMensagem("Ganhemo daih");
-        System.out.println(getX() + "," + getY() + " MATAMOS! ");
+        System.out.println(getX() + "," + getY() + " MATAMO! ");
         String px = Integer.toString(getX());
         String py = Integer.toString(getY());
         enviaMensagem(px + "," + py + ", Ganhemo daih!");
