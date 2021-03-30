@@ -10,41 +10,94 @@ public class AgenteUzumaki extends Agente {
     }
 
     public void pensa() {
-        if (podeDividir() && getEnergia() >= 800) {
-            divide();
-        }
 
-        else if ((!podeMoverPara(getDirecao())) || (isParado())) {
-            setDirecao(geraDirecaoAleatoria());
-        }
+        andaAleatorio();
 
         // seção de comandos para os agentes andarem mais no meio da tela
-        if (this.getX() == 0 && this.getY() == 0) {
+        if (this.getX() == 0 && (this.getY() == 0 || this.getY() == 660)) {
             setDirecao(DIREITA);
+        }
+        if (this.getX() == 860 && (this.getY() == 0 || this.getY() == 660)) {
+            setDirecao(ESQUERDA);
+        }
+        
+
+        if (this.getX() == 80 && this.getY() == 660) {
+            setDirecao(CIMA);
         }
         if (this.getX() == 80 && this.getY() == 0) {
             setDirecao(BAIXO);
         }
-
-        if (this.getX() == 80 && this.getY() == 480) {
-            setDirecao(DIREITA);
-        }
-        if (this.getId() < 22 && this.getX() == 600) {
+        if (this.getX() == 780 && this.getY() == 660) {
             setDirecao(CIMA);
         }
-        if (this.getId() < 22 && this.getX() == 600 && getY() == 120) {
+        if (this.getX() == 780 && this.getY() == 0) {
+            setDirecao(BAIXO);
+        }
+
+        
+        // Tabela de comandos para o nascimento em x = 0
+        if (this.getId() < 22 && this.getX() == 80 && this.getY() == 180) {
+            setDirecao(DIREITA);
+        }
+        if (this.getId() < 22 && this.getX() == 440 && this.getY() == 180) {
+            setDirecao(BAIXO);
+        }
+        if (this.getId() < 22 && this.getX() == 440 && this.getY() == 500) {
+            setDirecao(ESQUERDA);
+        }else if(this.getId() < 22 && this.getX() == 70 && this.getY() == 500){
+            setDirecao(DIREITA);
+        } 
+
+        if (this.getId() > 22 && this.getX() == 80 && this.getY() == 480) {
+            setDirecao(DIREITA);
+        }
+
+        if (this.getId() > 22 && this.getId() < 30 && this.getX() == 120) {
+            setDirecao(CIMA);
+        }
+        if (this.getId() > 22 && this.getId() < 30 && this.getX() == 120 && getY() == 140) {
+            setDirecao(DIREITA);
+        }
+
+        if (this.getId() > 30 && this.getX() == 360 && this.getY() == 480) {
+            setDirecao(CIMA);
+        }
+        if (this.getId() > 30 && this.getX() == 360 && this.getY() == 100) {
             setDirecao(ESQUERDA);
         }
 
-        if (this.getId() > 22 && this.getX() == 120) {
-            setDirecao(CIMA);
+        // comandos para nascimento em x = 860
+        if (this.getId() < 22 && this.getX() == 780 && this.getY() == 190) {
+            setDirecao(ESQUERDA);
         }
-        if (this.getId() > 22 && this.getX() == 120 && getY() == 260) {
-            setDirecao(DIREITA);
-        }
-        if (this.getId() > 22 && this.getX() == 470 && getY() == 260) {
+        if (this.getId() < 22 && this.getX() == 340 && this.getY() == 190) {
             setDirecao(BAIXO);
         }
+        if (this.getId() < 22 && this.getX() == 340 && this.getY() == 400) {
+            setDirecao(DIREITA);
+        }
+
+        if (this.getId() > 22 && this.getX() == 780 && this.getY() == 480) {
+            setDirecao(ESQUERDA);
+        }
+
+        if (this.getId() > 22 && this.getId() < 30 && this.getX() == 320) {
+            setDirecao(CIMA);
+        }
+        if (this.getId() > 22 && this.getId() < 30 && this.getX() == 120 && getY() == 140) {
+            setDirecao(DIREITA);
+        }
+
+        if (this.getId() > 30 && this.getX() == 360 && getY() == 480) {
+            setDirecao(CIMA);
+        }
+        if (this.getId() > 30 && this.getX() == 360 && getY() == 100) {
+            setDirecao(ESQUERDA);
+        }
+
+
+        andaAleatorio();
 
     }
 
@@ -59,10 +112,10 @@ public class AgenteUzumaki extends Agente {
     public void tomouDano(int energiaRestanteInimigo) {
         if (getEnergia() > energiaRestanteInimigo) {
             para();
-            System.out.println("Agente inimigo: " + getId() + "está tomando dano. Yeey");
+            System.out.println("Agente inimigo estah tomando dano. Yeey");
         } else {
             setDirecao(geraDirecaoAleatoria());
-            System.out.println("Agente: " + getId() + "está tomando pipoco então vai fugir");
+            System.out.println("Agente: " + getId() + "estah tomando pipoco entao vai fugir");
         }
     }
 
@@ -81,8 +134,18 @@ public class AgenteUzumaki extends Agente {
         }
     }
 
+    public void andaAleatorio(){
+        if ((!podeMoverPara(getDirecao())) || (isParado())) {
+            setDirecao(geraDirecaoAleatoria());
+        }
+    }
+
     public void ganhouCombate() {
-        enviaMensagem("Ganhemo");
+        //enviaMensagem("Ganhemo daih");
+        System.out.println(getX() + "," + getY() + " MATAMOS! ");
+        String px = Integer.toString(getX());
+        String py = Integer.toString(getY());
+        enviaMensagem(px + "," + py + " Ganhemo daih!");
     }
 
     public void recebeuMensagem(String msg) {
