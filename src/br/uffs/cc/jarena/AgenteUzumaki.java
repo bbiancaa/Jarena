@@ -145,7 +145,7 @@ public class AgenteUzumaki extends Agente {
         System.out.println(getX() + "," + getY() + " MATAMOS! ");
         String px = Integer.toString(getX());
         String py = Integer.toString(getY());
-        enviaMensagem(px + "," + py + " Ganhemo daih!");
+        enviaMensagem(px + "," + py + ", Ganhemo daih!");
     }
 
     public void recebeuMensagem(String msg) {
