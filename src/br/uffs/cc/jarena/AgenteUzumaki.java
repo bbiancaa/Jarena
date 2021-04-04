@@ -9,94 +9,12 @@ public class AgenteUzumaki extends Agente {
         setDirecao(geraDirecaoAleatoria());
     }
 
+    
+
     public void pensa() {
 
         andaAleatorio();
-
-        // seção de comandos para os agentes andarem mais no meio da tela
-        if (this.getX() == 0 && (this.getY() == 0 || this.getY() == 660)) {
-            setDirecao(DIREITA);
-        }
-        if (this.getX() == 860 && (this.getY() == 0 || this.getY() == 660)) {
-            setDirecao(ESQUERDA);
-        }
-        
-
-        if (this.getX() == 80 && this.getY() == 660) {
-            setDirecao(CIMA);
-        }
-        if (this.getX() == 80 && this.getY() == 0) {
-            setDirecao(BAIXO);
-        }
-        if (this.getX() == 780 && this.getY() == 660) {
-            setDirecao(CIMA);
-        }
-        if (this.getX() == 780 && this.getY() == 0) {
-            setDirecao(BAIXO);
-        }
-
-        
-        // seção de comandos para o nascimento em x = 0
-        if (this.getId() < 22 && this.getX() == 80 && this.getY() == 180) {
-            setDirecao(DIREITA);
-        }
-        if (this.getId() < 22 && this.getX() == 440 && this.getY() == 180) {
-            setDirecao(BAIXO);
-        }
-        if (this.getId() < 22 && this.getX() == 440 && this.getY() == 500) {
-            setDirecao(ESQUERDA);
-        }else if(this.getId() < 22 && this.getX() == 70 && this.getY() == 500){
-            setDirecao(DIREITA);
-        } 
-
-        if (this.getId() > 22 && this.getX() == 80 && this.getY() == 480) {
-            setDirecao(DIREITA);
-        }
-
-        if (this.getId() > 22 && this.getId() < 30 && this.getX() == 120) {
-            setDirecao(CIMA);
-        }
-        if (this.getId() > 22 && this.getId() < 30 && this.getX() == 120 && getY() == 140) {
-            setDirecao(DIREITA);
-        }
-
-        if (this.getId() > 30 && this.getX() == 360 && this.getY() == 480) {
-            setDirecao(CIMA);
-        }
-        if (this.getId() > 30 && this.getX() == 360 && this.getY() == 100) {
-            setDirecao(ESQUERDA);
-        }
-
-        // comandos para nascimento em x = 860
-        if (this.getId() < 22 && this.getX() == 780 && this.getY() == 190) {
-            setDirecao(ESQUERDA);
-        }
-        if (this.getId() < 22 && this.getX() == 340 && this.getY() == 190) {
-            setDirecao(BAIXO);
-        }
-        if (this.getId() < 22 && this.getX() == 340 && this.getY() == 400) {
-            setDirecao(DIREITA);
-        }
-
-        if (this.getId() > 22 && this.getX() == 780 && this.getY() == 480) {
-            setDirecao(ESQUERDA);
-        }
-
-        if (this.getId() > 22 && this.getId() < 30 && this.getX() == 320) {
-            setDirecao(CIMA);
-        }
-        if (this.getId() > 22 && this.getId() < 30 && this.getX() == 120 && getY() == 140) {
-            setDirecao(DIREITA);
-        }
-
-        if (this.getId() > 30 && this.getX() == 360 && getY() == 480) {
-            setDirecao(CIMA);
-        }
-        if (this.getId() > 30 && this.getX() == 360 && getY() == 100) {
-            setDirecao(ESQUERDA);
-        }
-
-
+        movimentoInicial();
         andaAleatorio();
 
     }
@@ -110,9 +28,15 @@ public class AgenteUzumaki extends Agente {
     }
 
     public void tomouDano(int energiaRestanteInimigo) {
-        if (getEnergia() > energiaRestanteInimigo) {
-            para();
+        if (this.getEnergia() > energiaRestanteInimigo) {
+            //para();
             System.out.println("Agente inimigo estah tomando dano. Yeey");
+            System.out.println("Minha energia " + getEnergia());
+            if(this.getEnergia() <= 500){
+                String px = Integer.toString(getX());
+                String py = Integer.toString(getY());
+                enviaMensagem(px + "," + py);
+            }
         } else {
             setDirecao(geraDirecaoAleatoria());
             System.out.println("Agente: " + getId() + "estah tomando pipoco entao vai fugir");
@@ -140,9 +64,39 @@ public class AgenteUzumaki extends Agente {
         }
     }
 
+    public void movimentoInicial(){
+       // posição inicial primeiro comando
+        if (this.getX() == 0 && this.getY() == 0) {
+            setDirecao(BAIXO);
+        }else if (this.getX() == 0 && this.getY() == (Constants.ALTURA_TELA * 0.95)) {
+            setDirecao(CIMA);  
+        }else if (this.getX() == (Constants.LARGURA_TELA * 0.95) && this.getY() == 0) {
+            setDirecao(BAIXO);
+        }else if (this.getX() == (Constants.LARGURA_TELA * 0.95) && this.getY() == (Constants.ALTURA_TELA * 0.95)) {
+            setDirecao(CIMA);
+        }
+        
+         // nascimento x = 0 e y = 0 ou 660
+        if ((this.getX() >= 0 && this.getX() <= 50) && (this.getY() == (Constants.ALTURA_TELA * 0.25) || this.getY() == (Constants.ALTURA_TELA * 0.75))){
+            setDirecao(DIREITA);
+        }
+        if(this.getX() == Constants.LARGURA_TELA * 0.25 ){
+            setDirecao(geraDirecaoAleatoria());
+        }
+
+        // nascimento x = =-860 e y = 0 ou 660
+        if ( this.getX() == (Constants.LARGURA_TELA * 0.95) && (this.getY() == Constants.ALTURA_TELA * 0.25 || this.getY() == Constants.ALTURA_TELA * 0.75)){
+            setDirecao(ESQUERDA);    
+        }
+        if(this.getX() == Constants.LARGURA_TELA * 0.75 ){
+            setDirecao(geraDirecaoAleatoria());
+        }
+    }
+    
+
     public void ganhouCombate() {
-        //enviaMensagem("Ganhemo daih");
         System.out.println(getX() + "," + getY() + " MATAMO! ");
+        System.out.println("Minha Energia que ganhei: " + getEnergia() + ", id: " + getId());
         String px = Integer.toString(getX());
         String py = Integer.toString(getY());
         enviaMensagem(px + "," + py + ", Ganhemo daih!");
@@ -152,7 +106,7 @@ public class AgenteUzumaki extends Agente {
         String[] Coordenadas = msg.split(",");
         int X = Integer.parseInt(Coordenadas[0]);
         int Y = Integer.parseInt(Coordenadas[1]);
-        System.out.println("Sendo energizados aqui!!");
+        //System.out.println("ENERGIA OU MORTE!");
         movePara(X, Y);
     }
 
